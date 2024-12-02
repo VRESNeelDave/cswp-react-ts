@@ -2,7 +2,7 @@ import './App.css'
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Appbar';
-import HomePage from './pages/Home'
+import DefaultPage from './pages/DefaultPage';
 import DatasetPage from './pages/Dataset';
 import ModelVisualisationPage from './pages/ModelVisualisation'
 import CitationPage from './pages/Citation';
@@ -13,7 +13,7 @@ function App() {
   return (
     <Router basename="/hotformerloc">
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<DefaultPage />} />
         <Route path="/dataset" element={<DatasetPage />} />
         <Route path="/models" element={<ModelVisualisationPage />} />
         <Route path="/examples" element={<ExamplesPage />} />
