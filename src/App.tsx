@@ -11,16 +11,16 @@ import ExamplesPage from './pages/Examples';
 
 function App() {
   return (
-    <Router>
+    <Router basename="/hotformerloc">
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="/dataset" element={<DatasetPage/>}/>
-        <Route path="/models" element={<ModelVisualisationPage/>}/>
-        <Route path="/examples" element={<ExamplesPage/>}/>
-        <Route path="/download" element={<DownloadPage/>}/>
-        <Route path="/citation" element={<CitationPage/>}/>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dataset" element={<DatasetPage />} />
+        <Route path="/models" element={<ModelVisualisationPage />} />
+        <Route path="/examples" element={<ExamplesPage />} />
+        <Route path="/download" element={<DownloadPage />} />
+        <Route path="/citation" element={<CitationPage />} />
       </Routes>
-      <Navigation/>
+      <Navigation />
     </Router>
   )
 }

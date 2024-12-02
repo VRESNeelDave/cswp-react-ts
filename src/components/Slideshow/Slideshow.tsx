@@ -33,7 +33,7 @@ const Slideshow: React.FC<SlideshowProps> = ({ images }) => {
             sx={{
                 position: "relative",
                 width: "100%",
-                height: "300px",
+                height: "400px",
                 overflow: "hidden",
                 borderRadius: 2,
             }}

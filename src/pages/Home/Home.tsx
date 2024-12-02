@@ -10,9 +10,15 @@ const images = [
 
 const App: React.FC = () => {
     return (
+      <>
+        <div>
+          <h2>HOTFormerLoc: Hierarchical Octree Transformer for Lidar Place Recognition</h2>
+        </div>
         <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
             <Slideshow images={images} />
         </div>
+      </>
+
     );
 };
 
