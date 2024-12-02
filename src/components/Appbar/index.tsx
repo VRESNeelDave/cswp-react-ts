@@ -1,7 +1,7 @@
 import Appbar from './Appbar'
 const Navigation = () => {
   return (
-    <Appbar siteName='CS-Wild-Places'/>
+    <Appbar siteName='HOTFormerLoc'/>
   )
 }
 
