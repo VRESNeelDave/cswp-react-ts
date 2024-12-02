@@ -3,9 +3,9 @@ import Slideshow from "../../components/Slideshow/Slideshow"
 
 // https://drive.google.com/thumbnail?id={Enter Your ID}&sz=w1000 
 const images = [
-    "https://vresneeldave.github.io/cswp-react-ts/assets/karawatha_image_1.png",
-    "https://vresneeldave.github.io/cswp-react-ts/assets/karawatha_image_2.png",
-    "https://vresneeldave.github.io/cswp-react-ts/assets/karawatha_image_3.png",
+    "https://vresneeldave.github.io/cswp-react-ts/src/assets/karawatha_image_1.png",
+    "https://vresneeldave.github.io/cswp-react-ts/src/assets/karawatha_image_2.png",
+    "https://vresneeldave.github.io/cswp-react-ts/src/assets/karawatha_image_3.png",
 ];
 
 const App: React.FC = () => {
