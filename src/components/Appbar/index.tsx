@@ -1,4 +1,3 @@
-import React from 'react'
 import Appbar from './Appbar'
 const Navigation = () => {
   return (
