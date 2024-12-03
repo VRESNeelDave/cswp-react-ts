@@ -8,10 +8,15 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { Collapse } from "@mui/material";
+import Collapse from "@mui/material/Collapse";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Drawer from "@mui/material/Drawer";
+import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import SwipeableDrawer from "@mui/material/SwipeableDrawer";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { useTheme } from "@mui/material/styles";
 
 const navigationItems = [
   {
@@ -47,18 +52,9 @@ const navigationItems = [
     path: "/dataset",
     children: [
       { label: "Overview", path: "/#overview" },
-      {
-        label: "Data Collection Methodology",
-        path: "/#methodology",
-      },
-      {
-        label: "Benchmarking",
-        path: "/#benchmarking",
-      },
-      {
-        label: "Model Images",
-        path: "/#model-images",
-      },
+      { label: "Data Collection Methodology", path: "/#methodology" },
+      { label: "Benchmarking", path: "/#benchmarking" },
+      { label: "Model Images", path: "/#model-images" },
     ],
   },
   {
@@ -66,10 +62,7 @@ const navigationItems = [
     path: "/visualisation",
     children: [
       { label: "Overview", path: "/#overview" },
-      {
-        label: "Compare Visualisations of Forests",
-        path: "/#compare",
-      },
+      { label: "Compare Visualisations of Forests", path: "/#compare" },
     ],
   },
   {
@@ -77,10 +70,7 @@ const navigationItems = [
     path: "/download",
     children: [
       { label: "Download Link", path: "/#download-link" },
-      {
-        label: "Usage Examples",
-        path: "/#usage-examples",
-      },
+      { label: "Usage Examples", path: "/#usage-examples" },
     ],
   },
   { label: "Acknowledgements", path: "/acknowledgements" },
@@ -89,6 +79,9 @@ const navigationItems = [
 
 const Appbar = ({ siteName }: { siteName: string }) => {
   const navigate = useNavigate();
+  const theme = useTheme();
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [drawerOpen, setDrawerOpen] = React.useState(false);
   const [openItems, setOpenItems] = React.useState<Set<string>>(new Set());
 
   const handleNavigation = (path: string) => {
@@ -108,12 +101,16 @@ const Appbar = ({ siteName }: { siteName: string }) => {
     }
   };
 
+  const toggleDrawer = (open: boolean) => {
+    setDrawerOpen(open);
+  };
+
   const toggleOpen = (label: string) => {
     const newOpenItems = new Set(openItems);
     if (newOpenItems.has(label)) {
-      newOpenItems.delete(label); // Close if already open
+      newOpenItems.delete(label);
     } else {
-      newOpenItems.add(label); // Open if not already open
+      newOpenItems.add(label);
     }
     setOpenItems(newOpenItems);
   };
@@ -131,11 +128,24 @@ const Appbar = ({ siteName }: { siteName: string }) => {
               }
             }}
             sx={{
-              pl: depth * 2, // Indent based on depth
-              cursor: item.children ? "default" : "pointer",
+              pl: depth * 2 + 1,
+              backgroundColor: openItems.has(item.label)
+                ? "rgba(0, 123, 255, 0.1)"
+                : "transparent",
+              "&:hover": {
+                backgroundColor: "rgba(0, 123, 255, 0.15)",
+              },
+              transition: "background-color 0.3s ease",
             }}
           >
-            <ListItemText primary={item.label} />
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{
+                fontWeight: openItems.has(item.label) ? "bold" : "normal",
+                fontSize: "0.95rem",
+                color: "#333",
+              }}
+            />
             {item.children &&
               (openItems.has(item.label) ? <ExpandLess /> : <ExpandMore />)}
           </ListItemButton>
@@ -143,7 +153,7 @@ const Appbar = ({ siteName }: { siteName: string }) => {
         {item.children && (
           <Collapse in={openItems.has(item.label)} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              {renderMenu(item.children, depth + 1)} {/* Recursive rendering */}
+              {renderMenu(item.children, depth + 1)}
             </List>
           </Collapse>
         )}
@@ -152,40 +162,85 @@ const Appbar = ({ siteName }: { siteName: string }) => {
 
   return (
     <Box sx={{ display: "flex" }}>
-      {/* Sidebar */}
-      <Drawer
-        variant="permanent"
-        anchor="left"
-        sx={{
-          "& .MuiDrawer-paper": {
-            width: 250,
-            boxSizing: "border-box",
-            backgroundColor: "#f9f9f9",
-          },
-        }}
-      >
-        <List>{renderMenu(navigationItems)}</List>
-      </Drawer>
-
-      {/* Main Content */}
-      <Box sx={{ flexGrow: 1, ml: 250 }}>
-        <AppBar
-          position="fixed"
+      {isSmallScreen ? (
+        <>
+          {/* AppBar with menu for smaller screens */}
+          <AppBar position="fixed" sx={{ backgroundColor: "white" }}>
+            <Toolbar>
+              <IconButton
+                edge="start"
+                aria-label="menu"
+                onClick={() => toggleDrawer(true)}
+              >
+                <MenuIcon />
+              </IconButton>
+              <Typography
+                variant="h6"
+                sx={{ flexGrow: 1, fontWeight: "bold", color: "green" }}
+              >
+                {siteName}
+              </Typography>
+            </Toolbar>
+          </AppBar>
+          <SwipeableDrawer
+            anchor="left"
+            open={drawerOpen}
+            onClose={() => toggleDrawer(false)}
+            onOpen={() => toggleDrawer(true)}
+          >
+            <Box
+              sx={{
+                width: 250,
+                backgroundColor: "#f4f5f7",
+                height: "100%",
+                boxSizing: "border-box",
+              }}
+            >
+              <Typography
+                variant="h6"
+                sx={{ px: 2, py: 2, fontWeight: "bold", color: "green" }}
+              >
+                {siteName}
+              </Typography>
+              <List>{renderMenu(navigationItems)}</List>
+            </Box>
+          </SwipeableDrawer>
+        </>
+      ) : (
+        // Sidebar for larger screens
+        <Drawer
+          variant="permanent"
+          anchor="left"
           sx={{
-            backgroundColor: "white",
-            color: "green",
-            boxShadow: "none",
-            borderBottom: "1px solid #ddd",
-            ml: 250,
+            "& .MuiDrawer-paper": {
+              width: 280,
+              boxSizing: "border-box",
+              backgroundColor: "#f4f5f7",
+              borderRight: "1px solid #ddd",
+            },
           }}
-        ></AppBar>
-        <Toolbar />
-        <Box sx={{ p: 3 }}>
-          <Typography variant="body1">
-            Welcome to the {siteName} application!
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              px: 2,
+              py: 2,
+              fontWeight: "bold",
+              color: "green",
+            }}
+          >
+            {siteName}
           </Typography>
-        </Box>
-      </Box>
+          <List>{renderMenu(navigationItems)}</List>
+        </Drawer>
+      )}
+      <Box
+        sx={{
+          flexGrow: 1,
+          ml: isSmallScreen ? 0 : 280,
+          mt: isSmallScreen ? 8 : 0,
+        }}
+      ></Box>
     </Box>
   );
 };
