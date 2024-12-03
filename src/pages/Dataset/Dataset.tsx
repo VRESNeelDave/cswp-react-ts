@@ -1,7 +1,11 @@
-const Dataset = () => {
-  return (
-    <div>Dataset</div>
-  )
-}
+import React from "react";
 
-export default Dataset
+const Dataset: React.FC = () => {
+  return (
+    <>
+    
+    </>
+  );
+};
+
+export default Dataset;

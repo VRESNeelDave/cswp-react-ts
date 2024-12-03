@@ -4,10 +4,11 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navigation from './components/Appbar';
 import DefaultPage from './pages/DefaultPage';
 import DatasetPage from './pages/Dataset';
-import ModelVisualisationPage from './pages/ModelVisualisation'
+import DatasetVisualisationPage from './pages/DatasetVisualisation';
 import CitationPage from './pages/Citation';
 import DownloadPage from './pages/Download';
 import ExamplesPage from './pages/Examples';
+
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Routes>
         <Route path="/" element={<DefaultPage />} />
         <Route path="/dataset" element={<DatasetPage />} />
-        <Route path="/models" element={<ModelVisualisationPage />} />
+        <Route path="/dataset-visualisation" element={<DatasetVisualisationPage />} />
         <Route path="/examples" element={<ExamplesPage />} />
         <Route path="/download" element={<DownloadPage />} />
         <Route path="/citation" element={<CitationPage />} />

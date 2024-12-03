@@ -35,7 +35,7 @@ const navigationItems = [
       },
       {
         label: "Experiments",
-        path: "/experiments",
+        path: "/#experiments",
         children: [
           {
             label: "Datasets and Evaluation Criteria",
@@ -51,7 +51,7 @@ const navigationItems = [
     label: "Dataset",
     path: "/dataset",
     children: [
-      { label: "Overview", path: "/#overview" },
+      { label: "Overview", path: "/dataset#overview" },
       { label: "Data Collection Methodology", path: "/#methodology" },
       { label: "Benchmarking", path: "/#benchmarking" },
       { label: "Model Images", path: "/#model-images" },
@@ -59,9 +59,9 @@ const navigationItems = [
   },
   {
     label: "Dataset Visualisation",
-    path: "/visualisation",
+    path: "/dataset-visualisation",
     children: [
-      { label: "Overview", path: "/#overview" },
+      { label: "Overview", path: "/dataset-visualisation" },
       { label: "Compare Visualisations of Forests", path: "/#compare" },
     ],
   },

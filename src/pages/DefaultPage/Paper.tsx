@@ -2,9 +2,9 @@ import React from "react";
 import Slideshow from "../../components/Slideshow/Slideshow";
 
 const images = [
-  "https://vresneeldave.github.io/hotformerloc/assets/karawatha_image_1.png",
-  "https://vresneeldave.github.io/hotformerloc/assets/karawatha_image_2.png",
-  "https://vresneeldave.github.io/hotformerloc/assets/karawatha_image_3.png",
+  "assets/karawatha_image_1.png",
+  "assets/karawatha_image_2.png",
+  "assets/karawatha_image_3.png",
 ];
 
 const Paper: React.FC = () => {
@@ -68,6 +68,20 @@ const Paper: React.FC = () => {
         <div style={{ textAlign: "center", marginTop: "20px" }}>
           <h4 id="pap">Pyramid Attention Pooling</h4>
         </div>
+      </div>
+      <div style={{ padding: "20px", maxWidth: "800px", margin: "0 auto" }}>
+        <h3 id="experiments">Experiments</h3>
+        <p>This is the Experiments Section</p>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}>
+          <div style={{ textAlign: "center", maxWidth: "100%" }}>
+            <h4 id="evaluation-criteria">Datasets and Evaluation Criteria</h4>
+          </div>
+        </div>
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "20px", justifyContent: "center" }}>
+        <div style={{ textAlign: "center", maxWidth: "100%" }}>
+            <h4 id="ablation-study">Ablation Study</h4>
+          </div>
+      </div>
       </div>
     </>
   );
